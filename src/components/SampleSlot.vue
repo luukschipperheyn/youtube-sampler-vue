@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="sample-slot">
     <div class="">
-      <youtube :video-id="videoId" ref="youtube" @playing="playing"></youtube>
+      <youtube :video-id="videoId" ref="youtube" @playing="playing" width="300" height="300"></youtube>
     </div>
     <button @click="playVideo">play</button>
     <input placeholder="youtube id" v-model="videoId">
@@ -68,5 +68,7 @@ export default {
 <style lang="css" scoped>
   .sample-slot{
     margin-bottom: 24px;
+    display: inline-block;
+    width: 300px;
   }
 </style>
