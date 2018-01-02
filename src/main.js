@@ -8,10 +8,21 @@ import VueYoutube from 'vue-youtube'
 Vue.use(VueYoutube)
 Vue.config.productionTip = true
 
+Object.defineProperty(Vue.prototype, '$bus', {
+  get () {
+    return this.$root.bus
+  }
+})
+
+const bus = new Vue({})
+
 /* eslint-disable no-new */
-new Vue({
+window.app = new Vue({
   el: '#app',
   router,
+  data: {
+    bus
+  },
   template: '<App/>',
   components: { App }
 })

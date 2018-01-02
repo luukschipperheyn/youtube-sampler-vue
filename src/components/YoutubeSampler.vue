@@ -2,9 +2,12 @@
   <div class="">
     <sample-slot 
       v-for="(sample, i) in samples" 
-      :key="i" 
-      keyboardKey="sample.keyboardKey" 
-      videoId="sample.videoId">
+      :key="i"
+      ref="sample-slots"
+      :keyboardKey="sample.keyboardKey"
+      :videoId="sample.videoId"
+      :sampleLength="sample.sampleLength"
+      :startTime="sample.startTime">
     </sample-slot>
     <sequencer
       :samples="samples">
@@ -21,11 +24,27 @@ export default {
       samples: [
         {
           keyboardKey: 'q',
-          videoId: 'NYWANrXNbMU'
+          videoId: 'iG9sl2TS-ks',
+          sampleLength: 320,
+          startTime: 87
         },
         {
           keyboardKey: 'w',
-          videoId: 'aeujZtBvMFY'
+          videoId: 'AklM3syOvsk',
+          sampleLength: 349,
+          startTime: 36.5
+        },
+        {
+          keyboardKey: 'e',
+          videoId: 'AklM3syOvsk',
+          sampleLength: 349,
+          startTime: 36.5
+        },
+        {
+          keyboardKey: 'r',
+          videoId: 'AklM3syOvsk',
+          sampleLength: 349,
+          startTime: 36.5
         }
       ]
     }
@@ -35,6 +54,12 @@ export default {
     'sequencer': Sequencer
   },
   created () {
+    this.$bus.$on('play-sample', this.playSample.bind(this))
+  },
+  methods: {
+    playSample (sampleIndex) {
+      this.$refs['sample-slots'][sampleIndex].play()
+    }
   }
 }
 </script>

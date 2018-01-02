@@ -3,24 +3,26 @@
     <div class="">
       <youtube :video-id="videoId" ref="youtube" @playing="playing" width="300" height="300"></youtube>
     </div>
-    <button @click="playVideo">play</button>
+    <button @click="play">play</button>
     <input placeholder="youtube id" v-model="videoId">
+    <youtube-search></youtube-search>
     <input type="number" step="0.1" v-model="startTime">
     <input type="number" v-model="sampleLength">
   </div>
 </template>
 
 <script>
+import YoutubeSearch from './YoutubeSearch'
 export default {
   data () {
-    return {
-      sampleLength: 1000,
-      startTime: 0.0
-    }
+    return {}
   },
-  props: ['keyboardKey', 'videoId'],
+  components: {
+    'youtube-search': YoutubeSearch
+  },
+  props: ['videoId', 'startTime', 'sampleLength', 'keyboardKey'],
   methods: {
-    playVideo () {
+    play () {
       this.rewind()
       this.player.playVideo()
     },
@@ -42,7 +44,7 @@ export default {
     },
     keyPressed (key) {
       if (key === this.keyboardKey) {
-        this.playVideo()
+        this.play()
       }
     }
   },
